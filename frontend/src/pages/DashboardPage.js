@@ -55,43 +55,43 @@ function DashboardPage() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Vacation System
+                        휴가 시스템
                     </Typography>
-                    <Typography sx={{ mr: 2 }}>Welcome, {user.name}!</Typography>
-                    <Button color="inherit" onClick={handleLogout}>Logout</Button>
+                    <Typography sx={{ mr: 2 }}>환영합니다, {user.name}님!</Typography>
+                    <Button color="inherit" onClick={handleLogout}>로그아웃</Button>
                 </Toolbar>
             </AppBar>
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', mb: 2 }}>
                     <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                        Leave Balance
+                        연차 현황
                     </Typography>
                     <Typography component="p">
-                        Total: {balance.total} | Used: {balance.used} | Remaining: {balance.remaining}
+                        총 연차: {balance.total} | 사용: {balance.used} | 잔여: {balance.remaining}
                     </Typography>
                 </Paper>
 
                 <Box sx={{ mb: 2 }}>
-                    <Button component={Link} to="/request-leave" variant="contained">Request Leave</Button>
+                    <Button component={Link} to="/request-leave" variant="contained">휴가 신청</Button>
                     {(user.position === '파트장' || user.position === '팀장') && (
-                        <Button component={Link} to="/approvals" variant="outlined" sx={{ ml: 1 }}>Approvals</Button>
+                        <Button component={Link} to="/approvals" variant="outlined" sx={{ ml: 1 }}>결재</Button>
                     )}
                     {user.is_admin && (
-                        <Button component={Link} to="/admin" variant="outlined" sx={{ ml: 1 }}>Admin</Button>
+                        <Button component={Link} to="/admin" variant="outlined" sx={{ ml: 1 }}>관리</Button>
                     )}
                 </Box>
 
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                    My Leave History
+                    내 휴가 내역
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Type</TableCell>
-                                <TableCell>Start Date</TableCell>
-                                <TableCell>End Date</TableCell>
-                                <TableCell>Status</TableCell>
+                                <TableCell>종류</TableCell>
+                                <TableCell>시작일</TableCell>
+                                <TableCell>종료일</TableCell>
+                                <TableCell>상태</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -106,7 +106,7 @@ function DashboardPage() {
                                 ))
                             ) : (
                                 <TableRow>
-                                    <td colSpan="4">No leave history found.</td>
+                                    <TableCell colSpan={4} align="center">휴가 내역이 없습니다.</TableCell>
                                 </TableRow>
                             )}
                         </TableBody>

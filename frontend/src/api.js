@@ -99,4 +99,9 @@ export const resetPassword = async (userId) => {
     return response.data;
 };
 
+export const getSubstituteUsers = async () => {
+    const response = await apiClient.get('/api/users/substitutes');
+    return response.data;
+};
+
 export default apiClient;

@@ -12,21 +12,21 @@ function ForceChangePasswordPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (newPassword !== confirmPassword) {
-            setError('Passwords do not match.');
+            setError('비밀번호가 일치하지 않습니다.');
             return;
         }
         if (newPassword.length < 6) { // Example validation
-            setError('Password must be at least 6 characters long.');
+            setError('비밀번호는 최소 6자 이상이어야 합니다.');
             return;
         }
         setError('');
         try {
             await changePassword(newPassword);
-            alert('Password changed successfully. Please log in again.');
+            alert('비밀번호가 성공적으로 변경되었습니다. 다시 로그인해주세요.');
             localStorage.removeItem('token');
             navigate('/');
         } catch (err) {
-            setError('Failed to change password.');
+            setError('비밀번호 변경에 실패했습니다.');
             console.error(err);
         }
     };
@@ -42,10 +42,10 @@ function ForceChangePasswordPage() {
                 }}
             >
                 <Typography component="h1" variant="h5">
-                    Change Your Password
+                    비밀번호 변경
                 </Typography>
                 <Typography component="p" sx={{ mt: 1 }}>
-                    Your password has been reset. You must change it before you can continue.
+                    비밀번호가 초기화되었습니다. 계속하려면 새 비밀번호를 설정해야 합니다.
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -53,7 +53,7 @@ function ForceChangePasswordPage() {
                         required
                         fullWidth
                         name="newPassword"
-                        label="New Password"
+                        label="새 비밀번호"
                         type="password"
                         id="newPassword"
                         value={newPassword}
@@ -64,7 +64,7 @@ function ForceChangePasswordPage() {
                         required
                         fullWidth
                         name="confirmPassword"
-                        label="Confirm New Password"
+                        label="새 비밀번호 확인"
                         type="password"
                         id="confirmPassword"
                         value={confirmPassword}
@@ -77,7 +77,7 @@ function ForceChangePasswordPage() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Set New Password
+                        새 비밀번호 설정
                     </Button>
                 </Box>
             </Box>

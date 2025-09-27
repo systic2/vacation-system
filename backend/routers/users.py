@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from datetime import date
+from typing import List
 
 from .. import models, schemas, services
 from .auth import get_db
@@ -24,6 +25,15 @@ async def get_user_leave_balance(db: Session = Depends(get_db), current_user: mo
     used_days = services.calculate_used_leave_days(db, user_id=current_user.id, year=current_year)
     remaining_days = total_days - used_days
     return {"total": total_days, "used": used_days, "remaining": remaining_days}
+
+@router.get("/substitutes", response_model=List[schemas.User])
+async def get_substitute_users(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    substitutes = db.query(models.User).filter(
+        models.User.part == current_user.part, 
+        models.User.id != current_user.id, 
+        models.User.is_active == True
+    ).all()
+    return substitutes
 
 @router.post("/me/change-password", response_model=schemas.User)
 async def change_user_password(password_data: schemas.PasswordChange, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):

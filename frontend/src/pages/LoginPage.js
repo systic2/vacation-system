@@ -21,7 +21,7 @@ function LoginPage() {
                 navigate('/dashboard');
             }
         } catch (err) {
-            setError('Login failed. Please check your credentials.');
+            setError('로그인에 실패했습니다. 사번과 비밀번호를 확인해주세요.');
             console.error(err);
         }
     };
@@ -37,7 +37,7 @@ function LoginPage() {
                 }}
             >
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    로그인
                 </Typography>
                 <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -45,7 +45,7 @@ function LoginPage() {
                         required
                         fullWidth
                         id="employeeId"
-                        label="Employee ID"
+                        label="사번"
                         name="employeeId"
                         autoComplete="username"
                         autoFocus
@@ -57,7 +57,7 @@ function LoginPage() {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="비밀번호"
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -71,7 +71,7 @@ function LoginPage() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign In
+                        로그인
                     </Button>
                 </Box>
             </Box>

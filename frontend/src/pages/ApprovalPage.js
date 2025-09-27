@@ -25,7 +25,7 @@ function ApprovalPage() {
             const data = await getPendingApprovals();
             setApprovals(data);
         } catch (err) {
-            setError('Failed to load pending approvals.');
+            setError('결재 대기 목록을 불러오는 데 실패했습니다.');
             console.error(err);
         }
     };
@@ -39,7 +39,7 @@ function ApprovalPage() {
             await approveLeave(leaveId);
             fetchApprovals();
         } catch (err) {
-            setError('Failed to approve leave request.');
+            setError('휴가 신청 승인에 실패했습니다.');
             console.error(err);
         }
     };
@@ -49,7 +49,7 @@ function ApprovalPage() {
             await rejectLeave(leaveId);
             fetchApprovals();
         } catch (err) {
-            setError('Failed to reject leave request.');
+            setError('휴가 신청 반려에 실패했습니다.');
             console.error(err);
         }
     };
@@ -58,19 +58,19 @@ function ApprovalPage() {
         <Container component="main" maxWidth="lg">
             <Box sx={{ marginTop: 4, display: 'flex', flexDirection: 'column' }}>
                 <Typography component="h1" variant="h5" gutterBottom>
-                    Pending Approvals
+                    결재 대기 목록
                 </Typography>
                 {error && <Alert severity="error" sx={{ width: '100%', mb: 2 }}>{error}</Alert>}
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Requester ID</TableCell>
-                                <TableCell>Type</TableCell>
-                                <TableCell>Start Date</TableCell>
-                                <TableCell>End Date</TableCell>
-                                <TableCell>Reason</TableCell>
-                                <TableCell>Actions</TableCell>
+                                <TableCell>신청자 ID</TableCell>
+                                <TableCell>종류</TableCell>
+                                <TableCell>시작일</TableCell>
+                                <TableCell>종료일</TableCell>
+                                <TableCell>사유</TableCell>
+                                <TableCell>작업</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -83,21 +83,21 @@ function ApprovalPage() {
                                         <TableCell>{leave.end_date}</TableCell>
                                         <TableCell>{leave.reason}</TableCell>
                                         <TableCell>
-                                            <Button variant="contained" color="success" size="small" onClick={() => handleApprove(leave.id)}>Approve</Button>
-                                            <Button variant="contained" color="error" size="small" sx={{ ml: 1 }} onClick={() => handleReject(leave.id)}>Reject</Button>
+                                            <Button variant="contained" color="success" size="small" onClick={() => handleApprove(leave.id)}>승인</Button>
+                                            <Button variant="contained" color="error" size="small" sx={{ ml: 1 }} onClick={() => handleReject(leave.id)}>반려</Button>
                                         </TableCell>
                                     </TableRow>
                                 ))
                             ) : (
                                 <TableRow>
-                                    <TableCell colSpan={6} align="center">No pending approvals.</TableCell>
+                                    <TableCell colSpan={6} align="center">결재 대기중인 휴가가 없습니다.</TableCell>
                                 </TableRow>
                             )}
                         </TableBody>
                     </Table>
                 </TableContainer>
                 <Box sx={{ mt: 2 }}>
-                    <Button component={Link} to="/dashboard" variant="outlined">Back to Dashboard</Button>
+                    <Button component={Link} to="/dashboard" variant="outlined">대시보드로 돌아가기</Button>
                 </Box>
             </Box>
         </Container>
